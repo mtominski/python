@@ -1,0 +1,2 @@
+# python
+kurs python
