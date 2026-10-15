@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
-""" Zestaw 2 - Milosz Tominski """
+"""Zestaw 2 - Milosz Tominski"""
 
 
 def count_words(text: str) -> int:
@@ -13,7 +13,16 @@ def split_with_underscore(text: str) -> str:
     """Zadanie 2.11: zwraca znaki napisu rozdzielone znakiem _."""
     return "_".join(text)
 
-# Funkcja do zadania 2.12
+
+def first_chars(text: str) -> str:
+    """Zadanie 2.12: zwraca napis z pierwszych znakow wyrazow."""
+    return "".join(word[0] for word in text.split())
+
+
+def last_chars(text: str) -> str:
+    """Zadanie 2.12: zwraca napis z ostatnich znakow wyrazow."""
+    return "".join(word[-1] for word in text.split())
+
 
 # Funkcja do zadania 2.13
 
@@ -40,7 +49,7 @@ if __name__ == "__main__":
     assert count_words(line) == 10
     assert count_words("") == 0
     assert count_words("jeden \t dwa\n\ntrzy") == 3
-    
+
     # Testy do zadania 2.11
     word = "Python"
     print(f"Zadanie 2.11, z podkresleniami: {split_with_underscore(word)}")
@@ -49,6 +58,12 @@ if __name__ == "__main__":
     assert split_with_underscore("") == ""
 
     # Testy do zadania 2.12
+    print(f"Zadanie 2.12, pierwsze znaki: {first_chars(line)}")
+    print(f"Zadanie 2.12, ostatnie znaki: {last_chars(line)}")
+    assert first_chars(line) == "PtjpspGwr1"
+    assert last_chars(line) == "nokayzRwu1"
+    assert first_chars("a") == last_chars("a") == "a"
+    assert first_chars("") == last_chars("") == ""
 
     # Testy do zadania 2.13
 
