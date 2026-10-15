@@ -24,7 +24,10 @@ def last_chars(text: str) -> str:
     return "".join(word[-1] for word in text.split())
 
 
-# Funkcja do zadania 2.13
+def total_length(text: str) -> int:
+    """Zadanie 2.13: zwraca laczna dlugosc wyrazow w napisie."""
+    return sum(len(word) for word in text.split())
+
 
 # Funkcja do zadania 2.14
 
@@ -66,6 +69,10 @@ if __name__ == "__main__":
     assert first_chars("") == last_chars("") == ""
 
     # Testy do zadania 2.13
+    print(f"Zadanie 2.13, laczna dlugosc wyrazow: {total_length(line)}")
+    assert total_length(line) == 52
+    assert total_length("") == 0
+    assert total_length("jeden \t dwa\n\ntrzy") == 12
 
     # Testy do zadania 2.14
 
