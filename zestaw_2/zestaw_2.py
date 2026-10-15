@@ -44,7 +44,10 @@ def join_numbers(numbers: list[int]) -> str:
     return "".join(str(number) for number in numbers)
 
 
-# Funkcja do zadania 2.16
+def replace_gvr(text: str) -> str:
+    """Zadanie 2.16: zamienia kazde GvR na Guido van Rossum."""
+    return text.replace("GvR", "Guido van Rossum")
+
 
 # Funkcja do zadania 2.17
 
@@ -54,9 +57,9 @@ def join_numbers(numbers: list[int]) -> str:
 
 
 if __name__ == "__main__":
-    line = """Python to jezyk programowania
-    stworzony przez GvR
-    w roku 1991"""
+    line = ("Python to jezyk programowania\n"
+            "stworzony przez GvR\n"
+            "w roku 1991")
 
     # Testy do zadania 2.10
     print(f"Zadanie 2.10, liczba wyrazow: {count_words(line)}")
@@ -103,6 +106,12 @@ if __name__ == "__main__":
     assert join_numbers([]) == ""
 
     # Testy do zadania 2.16
+    print(f"Zadanie 2.16, po zamianie: {replace_gvr(line)}")
+    assert "GvR" not in replace_gvr(line)
+    assert "przez Guido van Rossum" in replace_gvr(line)
+    assert replace_gvr("GvR i GvR") == "Guido van Rossum i Guido van Rossum"
+    assert replace_gvr("bez skrotu") == "bez skrotu"
+    assert replace_gvr("") == ""
 
     # Testy do zadania 2.17
 
