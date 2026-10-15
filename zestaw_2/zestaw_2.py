@@ -39,7 +39,10 @@ def longest_word_length(text: str) -> int:
     return len(longest_word(text))
 
 
-# Funkcja do zadania 2.15
+def join_numbers(numbers: list[int]) -> str:
+    """Zadanie 2.15: zwraca napis z cyfr kolejnych liczb z listy."""
+    return "".join(str(number) for number in numbers)
+
 
 # Funkcja do zadania 2.16
 
@@ -93,6 +96,11 @@ if __name__ == "__main__":
     assert longest_word_length("") == 0
 
     # Testy do zadania 2.15
+    L = [7, 24, 365, 1, 10]
+    print(f"Zadanie 2.15, cyfry liczb z listy: {join_numbers(L)}")
+    assert join_numbers(L) == "724365110"
+    assert join_numbers([5]) == "5"
+    assert join_numbers([]) == ""
 
     # Testy do zadania 2.16
 
