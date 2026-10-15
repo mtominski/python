@@ -64,7 +64,9 @@ def count_zeros(number: int) -> int:
     return str(number).count("0")
 
 
-# Funkcja do zadania 2.19
+def pad_numbers(numbers: list[int]) -> str:
+    """Zadanie 2.19: zwraca napis z trzycyfrowych blokow liczb z listy."""
+    return " ".join(str(number).zfill(3) for number in numbers)
 
 
 if __name__ == "__main__":
@@ -148,3 +150,8 @@ if __name__ == "__main__":
     assert count_zeros(-1000) == 3
 
     # Testy do zadania 2.19
+    print(f"Zadanie 2.19, trzycyfrowe bloki: {pad_numbers(L)}")
+    assert pad_numbers(L) == "007 024 365 001 010"
+    assert pad_numbers([100, 99]) == "100 099"
+    assert pad_numbers([5]) == "005"
+    assert pad_numbers([]) == ""
