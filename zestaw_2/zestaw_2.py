@@ -59,7 +59,10 @@ def sort_by_length(text: str) -> list[str]:
     return sorted(text.split(), key=len)
 
 
-# Funkcja do zadania 2.18
+def count_zeros(number: int) -> int:
+    """Zadanie 2.18: zwraca liczbe zer w zapisie dziesietnym liczby."""
+    return str(number).count("0")
+
 
 # Funkcja do zadania 2.19
 
@@ -137,5 +140,11 @@ if __name__ == "__main__":
     assert sort_alphabetically("") == sort_by_length("") == []
 
     # Testy do zadania 2.18
+    big_number = 10203004000500000000
+    print(f"Zadanie 2.18, liczba zer: {count_zeros(big_number)}")
+    assert count_zeros(big_number) == 15
+    assert count_zeros(0) == 1
+    assert count_zeros(123) == 0
+    assert count_zeros(-1000) == 3
 
     # Testy do zadania 2.19
