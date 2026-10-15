@@ -29,7 +29,15 @@ def total_length(text: str) -> int:
     return sum(len(word) for word in text.split())
 
 
-# Funkcja do zadania 2.14
+def longest_word(text: str) -> str:
+    """Zadanie 2.14: zwraca najdluzszy wyraz w napisie."""
+    return max(text.split(), key=len, default="")
+
+
+def longest_word_length(text: str) -> int:
+    """Zadanie 2.14: zwraca dlugosc najdluzszego wyrazu w napisie."""
+    return len(longest_word(text))
+
 
 # Funkcja do zadania 2.15
 
@@ -75,6 +83,14 @@ if __name__ == "__main__":
     assert total_length("jeden \t dwa\n\ntrzy") == 12
 
     # Testy do zadania 2.14
+    print(f"Zadanie 2.14, najdluzszy wyraz: {longest_word(line)}")
+    print(f"Zadanie 2.14, jego dlugosc: {longest_word_length(line)}")
+    assert longest_word(line) == "programowania"
+    assert longest_word_length(line) == 13
+    assert longest_word("ala ma kota") == "kota"
+    assert longest_word("ab cd") == "ab"
+    assert longest_word("") == ""
+    assert longest_word_length("") == 0
 
     # Testy do zadania 2.15
 
