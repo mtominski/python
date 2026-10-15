@@ -49,7 +49,15 @@ def replace_gvr(text: str) -> str:
     return text.replace("GvR", "Guido van Rossum")
 
 
-# Funkcja do zadania 2.17
+def sort_alphabetically(text: str) -> list[str]:
+    """Zadanie 2.17: zwraca liste wyrazow posortowana alfabetycznie."""
+    return sorted(text.split(), key=str.lower)
+
+
+def sort_by_length(text: str) -> list[str]:
+    """Zadanie 2.17: zwraca liste wyrazow posortowana wedlug dlugosci."""
+    return sorted(text.split(), key=len)
+
 
 # Funkcja do zadania 2.18
 
@@ -114,6 +122,19 @@ if __name__ == "__main__":
     assert replace_gvr("") == ""
 
     # Testy do zadania 2.17
+    print(f"Zadanie 2.17, alfabetycznie: {sort_alphabetically(line)}")
+    print(f"Zadanie 2.17, wedlug dlugosci: {sort_by_length(line)}")
+    assert sort_alphabetically(line) == [
+        "1991", "GvR", "jezyk", "programowania", "przez",
+        "Python", "roku", "stworzony", "to", "w",
+    ]
+    assert sort_by_length(line) == [
+        "w", "to", "GvR", "roku", "1991",
+        "jezyk", "przez", "Python", "stworzony", "programowania",
+    ]
+    assert sort_alphabetically("kot Ala ma") == ["Ala", "kot", "ma"]
+    assert sort_by_length("ccc a bb") == ["a", "bb", "ccc"]
+    assert sort_alphabetically("") == sort_by_length("") == []
 
     # Testy do zadania 2.18
 
