@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
-# Zestaw 2
+""" Zestaw 2 - Milosz Tominski """
 
-# Funkcja do zadania 2.10
-def liczba_wyrazow(napis: str) -> int:
-    return len(napis.split())
 
-# Funkcja do zadania 2.11
+def count_words(text: str) -> int:
+    """Zadanie 2.10: zwraca liczbe wyrazow w napisie."""
+    return len(text.split())
+
+
+def split_with_underscore(text: str) -> str:
+    """Zadanie 2.11: zwraca znaki napisu rozdzielone znakiem _."""
+    return "_".join(text)
 
 # Funkcja do zadania 2.12
 
@@ -32,12 +36,17 @@ if __name__ == "__main__":
     w roku 1991"""
 
     # Testy do zadania 2.10
-    print(f"Zadanie 2.10, liczba wyrazow: {liczba_wyrazow(line)}")
-    assert liczba_wyrazow(line) == 10
-    assert liczba_wyrazow("") == 0
-    assert liczba_wyrazow("jeden \t dwa\n\ntrzy") == 3
+    print(f"Zadanie 2.10, liczba wyrazow: {count_words(line)}")
+    assert count_words(line) == 10
+    assert count_words("") == 0
+    assert count_words("jeden \t dwa\n\ntrzy") == 3
     
     # Testy do zadania 2.11
+    word = "Python"
+    print(f"Zadanie 2.11, z podkresleniami: {split_with_underscore(word)}")
+    assert split_with_underscore(word) == "P_y_t_h_o_n"
+    assert split_with_underscore("a") == "a"
+    assert split_with_underscore("") == ""
 
     # Testy do zadania 2.12
 
