@@ -47,7 +47,12 @@ def cube_loop() -> None:
         print(cube_message(text))
 
 
-# Funkcja do zadania 3.5
+def make_ruler(length: int) -> str:
+    """Zadanie 3.5: zwraca miarke o zadanej dlugosci jako napis."""
+    bars = "|" + "....|" * length
+    numbers = "0" + "".join(f"{i:>5}" for i in range(1, length + 1))
+    return bars + "\n" + numbers
+
 
 # Funkcja do zadania 3.6
 
@@ -82,6 +87,16 @@ if __name__ == "__main__":
     assert cube_message("") == "Blad: '' nie jest liczba"
 
     # Testy do zadania 3.5
+    x = 12
+    print(f"Zadanie 3.5, miarka dla x = {x}:\n{make_ruler(x)}")
+    assert make_ruler(x) == (
+        "|....|....|....|....|....|....|....|....|....|....|....|....|\n"
+        "0    1    2    3    4    5    6    7    8    9   10   11   12")
+    assert make_ruler(0) == "|\n0"
+    assert make_ruler(1) == "|....|\n0    1"
+    bars, numbers = make_ruler(150).split("\n")
+    for i in range(151):
+        assert bars[5 * i] == "|" and numbers[5 * i] == str(i)[-1]
 
     # Testy do zadania 3.6
 
