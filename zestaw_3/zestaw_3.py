@@ -73,7 +73,10 @@ def all_elements(first: Sequence, second: Sequence) -> list:
     return sorted(set(first) | set(second))
 
 
-# Funkcja do zadania 3.9
+def sequence_sums(sequences: Sequence[Sequence[float]]) -> list[float]:
+    """Zadanie 3.9: zwraca liste sum liczb z kolejnych sekwencji."""
+    return [sum(sequence) for sequence in sequences]
+
 
 # Funkcja do zadania 3.10
 
@@ -140,6 +143,11 @@ if __name__ == "__main__":
     assert all_elements([], []) == []
 
     # Testy do zadania 3.9
+    sequences = [[], [4], (1, 2), [3, 4], (5, 6, 7)]
+    print(f"Zadanie 3.9, sumy: {sequence_sums(sequences)}")
+    assert sequence_sums(sequences) == [0, 4, 3, 7, 18]
+    assert sequence_sums([(1.5, 2.5), [-1, 1]]) == [4.0, 0]
+    assert sequence_sums([]) == []
 
     # Testy do zadania 3.10
 
