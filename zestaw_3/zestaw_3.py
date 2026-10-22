@@ -3,6 +3,8 @@
 
 """Zestaw 3 - Milosz Tominski"""
 
+from collections.abc import Sequence
+
 
 def skip_multiples_of_3_for(limit: int = 30) -> list[int]:
     """Zadanie 3.3: liczby od 0 do limit bez podzielnych przez 3 (for)."""
@@ -61,7 +63,15 @@ def make_grid(columns: int, rows: int) -> str:
     return "\n".join([border] + [middle, border] * rows)
 
 
-# Funkcja do zadania 3.8
+def common_elements(first: Sequence, second: Sequence) -> list:
+    """Zadanie 3.8a: zwraca elementy wspolne obu sekwencji bez powtorzen."""
+    return sorted(set(first) & set(second))
+
+
+def all_elements(first: Sequence, second: Sequence) -> list:
+    """Zadanie 3.8b: zwraca wszystkie elementy obu sekwencji bez powtorzen."""
+    return sorted(set(first) | set(second))
+
 
 # Funkcja do zadania 3.9
 
@@ -118,6 +128,16 @@ if __name__ == "__main__":
     assert make_grid(2, 3).count("\n") == 6
 
     # Testy do zadania 3.8
+    first = [1, 2, 3, 3, 4]
+    second = (3, 4, 4, 5)
+    print(f"Zadanie 3.8a, wspolne: {common_elements(first, second)}")
+    print(f"Zadanie 3.8b, wszystkie: {all_elements(first, second)}")
+    assert common_elements(first, second) == [3, 4]
+    assert all_elements(first, second) == [1, 2, 3, 4, 5]
+    assert common_elements("abca", "cad") == ["a", "c"]
+    assert all_elements("abca", "cad") == ["a", "b", "c", "d"]
+    assert common_elements([1, 2], [3, 4]) == []
+    assert all_elements([], []) == []
 
     # Testy do zadania 3.9
 
