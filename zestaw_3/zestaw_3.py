@@ -24,7 +24,28 @@ def skip_multiples_of_3_while(limit: int = 30) -> list[int]:
     return result
 
 
-# Funkcja do zadania 3.4
+def cube_message(text: str) -> str:
+    """Zadanie 3.4: zwraca x i x**3 albo komunikat o bledzie."""
+    try:
+        x = float(text)
+    except ValueError:
+        return f"Blad: {text!r} nie jest liczba"
+    else:
+        return f"x = {x}, x**3 = {x ** 3}"
+
+
+def cube_loop() -> None:
+    """Zadanie 3.4: wczytuje liczby w petli az do wpisania stop."""
+    while True:
+        try:
+            text = input("Podaj liczbe (stop konczy): ")
+        except EOFError:
+            print()
+            break
+        if text.strip() == "stop":
+            break
+        print(cube_message(text))
+
 
 # Funkcja do zadania 3.5
 
@@ -52,6 +73,13 @@ if __name__ == "__main__":
     assert skip_multiples_of_3_for(3) == [1, 2]
 
     # Testy do zadania 3.4
+    print(f"Zadanie 3.4, dla 2: {cube_message('2')}")
+    print(f"Zadanie 3.4, dla abc: {cube_message('abc')}")
+    assert cube_message("2") == "x = 2.0, x**3 = 8.0"
+    assert cube_message("-1.5") == "x = -1.5, x**3 = -3.375"
+    assert cube_message(" 3 ") == "x = 3.0, x**3 = 27.0"
+    assert cube_message("abc") == "Blad: 'abc' nie jest liczba"
+    assert cube_message("") == "Blad: '' nie jest liczba"
 
     # Testy do zadania 3.5
 
@@ -62,3 +90,8 @@ if __name__ == "__main__":
     # Testy do zadania 3.9
 
     # Testy do zadania 3.10
+
+    # Program do zadania 3.4
+    print("\nZadanie 3.4, program wypisuje x i x**3 dla podanych liczb.\n"
+          "Wpisz stop, aby zakonczyc.")
+    cube_loop()
