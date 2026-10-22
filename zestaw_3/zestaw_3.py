@@ -54,7 +54,12 @@ def make_ruler(length: int) -> str:
     return bars + "\n" + numbers
 
 
-# Funkcja do zadania 3.6
+def make_grid(columns: int, rows: int) -> str:
+    """Zadanie 3.6: zwraca prostokat z kratek jako napis."""
+    border = "+" + "---+" * columns
+    middle = "|" + "   |" * columns
+    return "\n".join([border] + [middle, border] * rows)
+
 
 # Funkcja do zadania 3.8
 
@@ -99,6 +104,18 @@ if __name__ == "__main__":
         assert bars[5 * i] == "|" and numbers[5 * i] == str(i)[-1]
 
     # Testy do zadania 3.6
+    x = 4
+    y = 2
+    print(f"Zadanie 3.6, prostokat dla x = {x}, y = {y}:\n{make_grid(x, y)}")
+    assert make_grid(x, y) == (
+        "+---+---+---+---+\n"
+        "|   |   |   |   |\n"
+        "+---+---+---+---+\n"
+        "|   |   |   |   |\n"
+        "+---+---+---+---+")
+    assert make_grid(1, 1) == "+---+\n|   |\n+---+"
+    assert make_grid(3, 0) == "+---+---+---+"
+    assert make_grid(2, 3).count("\n") == 6
 
     # Testy do zadania 3.8
 
