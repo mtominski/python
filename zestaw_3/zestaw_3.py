@@ -78,7 +78,57 @@ def sequence_sums(sequences: Sequence[Sequence[float]]) -> list[float]:
     return [sum(sequence) for sequence in sequences]
 
 
-# Funkcja do zadania 3.10
+def roman_dict_literal() -> dict[str, int]:
+    """Zadanie 3.10: slownik cyfr rzymskich zapisany jako literal."""
+    return {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+
+
+def roman_dict_keywords() -> dict[str, int]:
+    """Zadanie 3.10: slownik cyfr rzymskich z dict() i nazwanych argumentow."""
+    return dict(I=1, V=5, X=10, L=50, C=100, D=500, M=1000)
+
+
+def roman_dict_zip() -> dict[str, int]:
+    """Zadanie 3.10: slownik cyfr rzymskich z dict() i zip()."""
+    return dict(zip("IVXLCDM", [1, 5, 10, 50, 100, 500, 1000]))
+
+
+def roman_dict_pairs() -> dict[str, int]:
+    """Zadanie 3.10: slownik cyfr rzymskich z listy par (klucz, wartosc)."""
+    pairs = [("I", 1), ("V", 5), ("X", 10), ("L", 50),
+             ("C", 100), ("D", 500), ("M", 1000)]
+    return dict(pairs)
+
+
+def roman_dict_comprehension() -> dict[str, int]:
+    """Zadanie 3.10: slownik skladany wyliczany ze wzoru 1, 5, 10, 50..."""
+    return {digit: (5 if i % 2 else 1) * 10 ** (i // 2)
+            for i, digit in enumerate("IVXLCDM")}
+
+
+def roman_dict_loop() -> dict[str, int]:
+    """Zadanie 3.10: slownik cyfr rzymskich wypelniany w petli for."""
+    result = {}
+    for digit, value in zip("IVXLCDM", [1, 5, 10, 50, 100, 500, 1000]):
+        result[digit] = value
+    return result
+
+
+def roman2int(text: str) -> int:
+    """Zadanie 3.10: zamienia liczbe zapisana po rzymsku na arabska."""
+    digits = roman_dict_literal()
+    values = []
+    for letter in text:
+        if letter not in digits:
+            raise ValueError(f"niepoprawna cyfra rzymska: {letter!r}")
+        values.append(digits[letter])
+    total = 0
+    for value, next_value in zip(values, values[1:] + [0]):
+        if value < next_value:
+            total -= value
+        else:
+            total += value
+    return total
 
 
 if __name__ == "__main__":
@@ -150,6 +200,27 @@ if __name__ == "__main__":
     assert sequence_sums([]) == []
 
     # Testy do zadania 3.10
+    roman = roman_dict_literal()
+    print(f"Zadanie 3.10, slownik: {roman}")
+    assert "".join(roman) == "IVXLCDM"
+    assert list(roman.values()) == [1, 5, 10, 50, 100, 500, 1000]
+    for build in (roman_dict_keywords, roman_dict_zip, roman_dict_pairs,
+                  roman_dict_comprehension, roman_dict_loop):
+        assert build() == roman
+    print(f"Zadanie 3.10, MCMXCIV = {roman2int('MCMXCIV')}")
+    assert roman2int("MCMXCIV") == 1994
+    assert roman2int("MMXXVI") == 2026
+    assert roman2int("CDXLIV") == 444
+    assert roman2int("MMMCMXCIX") == 3999
+    first_ten = "I II III IV V VI VII VIII IX X".split()
+    assert [roman2int(number) for number in first_ten] == list(range(1, 11))
+    assert roman2int("") == 0
+    try:
+        roman2int("XIA")
+    except ValueError as error:
+        assert str(error) == "niepoprawna cyfra rzymska: 'A'"
+    else:
+        raise AssertionError("roman2int nie zglosil ValueError")
 
     # Program do zadania 3.4
     print("\nZadanie 3.4, program wypisuje x i x**3 dla podanych liczb.\n"
