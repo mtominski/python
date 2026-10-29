@@ -4,6 +4,7 @@
 """Zestaw 4 - Milosz Tominski"""
 
 import math
+from collections.abc import Sequence
 
 
 def make_ruler(n: int) -> str:
@@ -63,7 +64,16 @@ def odwracanie_rek(L: list, left: int, right: int) -> None:
         odwracanie_rek(L, left + 1, right - 1)
 
 
-# Funkcja do zadania 4.6
+def sum_seq(sequence: Sequence) -> float:
+    """Zadanie 4.6: zwraca sume liczb z sekwencji z podsekwencjami."""
+    total = 0
+    for item in sequence:
+        if isinstance(item, (list, tuple)):
+            total += sum_seq(item)
+        else:
+            total += item
+    return total
+
 
 # Funkcja do zadania 4.7
 
@@ -147,5 +157,20 @@ if __name__ == "__main__":
                 raise AssertionError(f"brak ValueError dla {left}, {right}")
 
     # Testy do zadania 4.6
+    sequence = [1, (2, 3), [], [4, (5, 6, 7)], 8, [9]]
+    print(f"Zadanie 4.6, suma {sequence} = {sum_seq(sequence)}")
+    assert sum_seq(sequence) == 45
+    assert sum_seq([1, 2, 3]) == 6
+    assert sum_seq((1, [2, (3,)])) == 6
+    assert sum_seq([[[[[5]]]]]) == 5
+    assert sum_seq([1.5, (2.5, [1])]) == 5.0
+    assert sum_seq([]) == 0
+    assert sum_seq([[], ((), [])]) == 0
+    try:
+        sum_seq([1, "a"])
+    except TypeError:
+        pass
+    else:
+        raise AssertionError("brak TypeError dla elementu nieliczbowego")
 
     # Testy do zadania 4.7
