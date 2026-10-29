@@ -75,7 +75,15 @@ def sum_seq(sequence: Sequence) -> float:
     return total
 
 
-# Funkcja do zadania 4.7
+def flatten(sequence: Sequence) -> list:
+    """Zadanie 4.7: zwraca splaszczona liste elementow sekwencji."""
+    result = []
+    for item in sequence:
+        if isinstance(item, (list, tuple)):
+            result.extend(flatten(item))
+        else:
+            result.append(item)
+    return result
 
 
 if __name__ == "__main__":
@@ -174,3 +182,16 @@ if __name__ == "__main__":
         raise AssertionError("brak TypeError dla elementu nieliczbowego")
 
     # Testy do zadania 4.7
+    print(f"Zadanie 4.7, splaszczona: {flatten(sequence)}")
+    assert flatten(sequence) == [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    assert sum(flatten(sequence)) == sum_seq(sequence)
+    assert flatten([[[[[5]]]]]) == [5]
+    assert flatten(["a", ("b", ["c"])]) == ["a", "b", "c"]
+    assert flatten(["abc", ["de"]]) == ["abc", "de"]
+    assert flatten([]) == []
+    assert flatten([[], ((), [])]) == []
+    nested = [1, [2, [3]]]
+    flatten(nested)
+    assert nested == [1, [2, [3]]]
+    flat = [1, 2]
+    assert flatten(flat) == flat and flatten(flat) is not flat
