@@ -44,7 +44,24 @@ def fibonacci(n: int) -> int:
     return previous
 
 
-# Funkcja do zadania 4.5
+def odwracanie(L: list, left: int, right: int) -> None:
+    """Zadanie 4.5: odwraca w miejscu L od left do right (iteracyjnie)."""
+    if not 0 <= left <= right < len(L):
+        raise ValueError("niepoprawny zakres left, right")
+    while left < right:
+        L[left], L[right] = L[right], L[left]
+        left += 1
+        right -= 1
+
+
+def odwracanie_rek(L: list, left: int, right: int) -> None:
+    """Zadanie 4.5: odwraca w miejscu L od left do right (rekurencyjnie)."""
+    if not 0 <= left <= right < len(L):
+        raise ValueError("niepoprawny zakres left, right")
+    L[left], L[right] = L[right], L[left]
+    if left + 1 < right - 1:
+        odwracanie_rek(L, left + 1, right - 1)
+
 
 # Funkcja do zadania 4.6
 
@@ -109,6 +126,25 @@ if __name__ == "__main__":
         raise AssertionError("brak ValueError dla fibonacci(-1)")
 
     # Testy do zadania 4.5
+    L = list(range(10))
+    odwracanie(L, 2, 6)
+    print(f"Zadanie 4.5, po odwracanie(L, 2, 6): {L}")
+    assert L == [0, 1, 6, 5, 4, 3, 2, 7, 8, 9]
+    for reverse in (odwracanie, odwracanie_rek):
+        for left in range(8):
+            for right in range(left, 8):
+                L = list(range(8))
+                expected = list(range(8))
+                expected[left:right + 1] = expected[left:right + 1][::-1]
+                assert reverse(L, left, right) is None
+                assert L == expected
+        for left, right in ((5, 2), (-1, 3), (0, 8)):
+            try:
+                reverse(list(range(8)), left, right)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError(f"brak ValueError dla {left}, {right}")
 
     # Testy do zadania 4.6
 
