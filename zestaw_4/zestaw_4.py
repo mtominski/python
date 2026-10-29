@@ -34,7 +34,15 @@ def factorial(n: int) -> int:
     return result
 
 
-# Funkcja do zadania 4.4
+def fibonacci(n: int) -> int:
+    """Zadanie 4.4: zwraca n-ty wyraz ciagu Fibonacciego (iteracyjnie)."""
+    if n < 0:
+        raise ValueError("numer wyrazu ciagu musi byc >= 0")
+    previous, current = 0, 1
+    for _ in range(n):
+        previous, current = current, previous + current
+    return previous
+
 
 # Funkcja do zadania 4.5
 
@@ -87,6 +95,18 @@ if __name__ == "__main__":
         raise AssertionError("brak ValueError dla factorial(-1)")
 
     # Testy do zadania 4.4
+    first = [fibonacci(n) for n in range(15)]
+    print(f"Zadanie 4.4, pierwsze wyrazy: {first}")
+    assert first == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377]
+    assert fibonacci(50) == 12586269025
+    for n in range(2, 100):
+        assert fibonacci(n) == fibonacci(n - 1) + fibonacci(n - 2)
+    try:
+        fibonacci(-1)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("brak ValueError dla fibonacci(-1)")
 
     # Testy do zadania 4.5
 
