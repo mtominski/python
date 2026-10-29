@@ -3,6 +3,8 @@
 
 """Zestaw 4 - Milosz Tominski"""
 
+import math
+
 
 def make_ruler(n: int) -> str:
     """Zadanie 4.2: zwraca miarke o dlugosci n jako napis."""
@@ -22,7 +24,15 @@ def make_grid(rows: int, cols: int) -> str:
     return "\n".join([border] + [middle, border] * rows)
 
 
-# Funkcja do zadania 4.3
+def factorial(n: int) -> int:
+    """Zadanie 4.3: zwraca silnie n! obliczona iteracyjnie."""
+    if n < 0:
+        raise ValueError("silnia jest okreslona tylko dla n >= 0")
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
 
 # Funkcja do zadania 4.4
 
@@ -62,6 +72,19 @@ if __name__ == "__main__":
             raise AssertionError("brak ValueError dla ujemnego argumentu")
 
     # Testy do zadania 4.3
+    print(f"Zadanie 4.3, 10! = {factorial(10)}")
+    assert factorial(0) == 1
+    assert factorial(1) == 1
+    assert factorial(5) == 120
+    assert factorial(10) == 3628800
+    for n in range(50):
+        assert factorial(n) == math.factorial(n)
+    try:
+        factorial(-1)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("brak ValueError dla factorial(-1)")
 
     # Testy do zadania 4.4
 
