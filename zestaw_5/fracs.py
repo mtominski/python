@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
-"""Zestaw 5 - Milosz Tominski
+"""
+Zestaw 5 - Milosz Tominski
 
 Zadanie 5.2: modul fracs, dzialania na ulamkach [licznik, mianownik].
 """
